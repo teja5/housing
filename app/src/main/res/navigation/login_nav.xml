@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_nav"
+    app:startDestination="@id/fragmentLogin">
+
+    <fragment
+        android:id="@+id/fragmentLogin"
+        android:name="com.vk.housing.authentication.FragmentLogin"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_fragmentLogin_to_fragmentSignup"
+            app:destination="@id/fragmentSignup" />
+        <action
+            android:id="@+id/action_fragmentLogin_to_fragmentForgetPassword"
+            app:destination="@id/fragmentForgetPassword" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSignup"
+        android:name="com.vk.housing.authentication.FragmentSignup"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_fragmentSignup_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
+        <action
+            android:id="@+id/action_fragmentSignup_to_fragmentOtp"
+            app:destination="@id/fragmentOtp" />
+        <action
+            android:id="@+id/action_fragmentSignup_to_fragmentResetPassword"
+            app:destination="@id/fragmentResetPassword" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentForgetPassword"
+        android:name="com.vk.housing.authentication.FragmentForgetPassword"
+        android:label="fragment_forget_password"
+        tools:layout="@layout/fragment_forget_password" >
+        <action
+            android:id="@+id/action_fragmentForgetPassword_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
+        <action
+            android:id="@+id/action_fragmentForgetPassword_to_fragmentOtp"
+            app:destination="@id/fragmentOtp" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentOtp"
+        android:name="com.vk.housing.authentication.FragmentOtp"
+        android:label="fragment_otp"
+        tools:layout="@layout/fragment_otp" >
+        <action
+            android:id="@+id/action_fragmentOtp_to_fragmentLogin"
+            app:destination="@id/fragmentLogin" />
+        <action
+            android:id="@+id/action_fragmentOtp_to_fragmentResetPassword"
+            app:destination="@id/fragmentResetPassword" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentResetPassword"
+        android:name="com.vk.housing.authentication.FragmentResetPassword"
+        android:label="fragment_reset_password"
+        tools:layout="@layout/fragment_reset_password" />
+</navigation>
