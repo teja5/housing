@@ -8,12 +8,14 @@
         <entry key="..\:/MyProjects/housing/app/src/main/res/layout/activity_settings.xml" value="0.1" />
         <entry key="..\:/MyProjects/housing/app/src/main/res/layout/activity_welcome.xml" value="0.1" />
         <entry key="..\:/MyProjects/housing/app/src/main/res/layout/fragment_add.xml" value="0.1" />
+        <entry key="..\:/MyProjects/housing/app/src/main/res/layout/fragment_change_password.xml" value="0.1" />
         <entry key="..\:/MyProjects/housing/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/MyProjects/housing/app/src/main/res/layout/fragment_login.xml" value="0.15520833333333334" />
         <entry key="..\:/MyProjects/housing/app/src/main/res/layout/fragment_otp.xml" value="0.15520833333333334" />
         <entry key="..\:/MyProjects/housing/app/src/main/res/layout/fragment_profile.xml" value="0.1" />
         <entry key="..\:/MyProjects/housing/app/src/main/res/layout/fragment_reset_password.xml" value="0.15520833333333334" />
         <entry key="..\:/MyProjects/housing/app/src/main/res/layout/fragment_signup.xml" value="0.15520833333333334" />
+        <entry key="..\:/MyProjects/housing/app/src/main/res/layout/fragment_subscription.xml" value="0.1" />
         <entry key="..\:/MyProjects/housing/app/src/main/res/layout/slider_item.xml" value="0.1" />
         <entry key="..\:/MyProjects/housing/app/src/main/res/menu/home_menu.xml" value="0.1" />
       </map>
