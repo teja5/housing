@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HousingClient {
 
 //    public static final String BASE_URL = "https://sandbox.eisedo.com/";
-    public static final String BASE_URL = "https://app.eisedo.com/";
+    public static final String BASE_URL = "http://184.72.6.13:8080/housing/";
 //    public static final String BASE_URL = "https://dofirst.co.uk/";
 //    Retrofit retrofit = new Retrofit.Builder()
 //            .baseUrl(BASE_URL)m
@@ -61,11 +61,11 @@ public class HousingClient {
             final SSLContext sslContext = SSLContext.getInstance("SSL");
             sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
 
-            // Create an ssl socket factory with our all-trusting manager
-            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-
-
-            client.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
+//            // Create an ssl socket factory with our all-trusting manager
+//            final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
+//
+//
+//            client.sslSocketFactory(sslSocketFactory, (X509TrustManager) trustAllCerts[0]);
             client.hostnameVerifier(new HostnameVerifier() {
                 @Override
                 public boolean verify(String hostname, SSLSession session) {

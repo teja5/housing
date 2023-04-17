@@ -9,12 +9,18 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vk.housing.Injection;
 import com.vk.housing.MainActivity;
 import com.vk.housing.R;
+import com.vk.housing.util.ResultCallBackListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -87,5 +93,23 @@ public class FragmentLogin extends Fragment {
         view.findViewById(R.id.btn_forget_password).setOnClickListener(view1 -> {
             navController.navigate(R.id.action_fragmentLogin_to_fragmentForgetPassword);
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        Map<String,String> signUp = new HashMap<>();
+//
+//        Injection.housingRepository(getActivity()).signup(signUp, new ResultCallBackListener() {
+//            @Override
+//            public void onSuccess(Object o) {
+//                Log.d("Success","CAled");
+//            }
+//
+//            @Override
+//            public void onFailure(Object o) {
+//                Log.d("Failure","CAled");
+//            }
+//        });
     }
 }

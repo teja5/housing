@@ -2,6 +2,10 @@ package com.vk.housing.data;
 
 import android.content.Context;
 
+import com.vk.housing.util.ResultCallBackListener;
+
+import java.util.Map;
+
 public class HousingRepository implements HousingDataSource {
 
     public static HousingRepository housingRepository;
@@ -21,5 +25,10 @@ public class HousingRepository implements HousingDataSource {
             housingRepository = new HousingRepository(housingDataSourceRemote, context);
         }
         return housingRepository;
+    }
+
+    @Override
+    public void signup(Map<String, String> signUpMap, ResultCallBackListener resultCallBackListener) {
+
     }
 }

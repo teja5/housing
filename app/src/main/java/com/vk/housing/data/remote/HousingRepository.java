@@ -3,6 +3,9 @@ package com.vk.housing.data.remote;
 import android.content.Context;
 
 import com.vk.housing.data.HousingDataSource;
+import com.vk.housing.util.ResultCallBackListener;
+
+import java.util.Map;
 
 public class HousingRepository implements HousingDataSource {
 
@@ -25,4 +28,8 @@ public class HousingRepository implements HousingDataSource {
         return housingRepository;
     }
 
+    @Override
+    public void signup(Map<String, String> signUpMap, ResultCallBackListener resultCallBackListener) {
+        housingDataSourceRemote.signup(signUpMap,resultCallBackListener);
+    }
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+
+    <base-config cleartextTrafficPermitted="false" />
+
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="false">
+            184.72.6.13:8080</domain>
+    </domain-config>
+
+</network-security-config>
