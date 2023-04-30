@@ -77,7 +77,7 @@ public class FragmentSignup extends Fragment {
             navController.navigate(R.id.action_fragmentSignup_to_fragmentOtp);
         });
 
-        view.findViewById(R.id.btn_back).setOnClickListener(view1 -> {
+        view.findViewById(R.id.tv_already_login).setOnClickListener(view1 -> {
             navController.navigate(R.id.action_fragmentSignup_to_fragmentLogin);
         });
     }

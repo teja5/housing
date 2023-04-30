@@ -86,11 +86,11 @@ public class FragmentLogin extends Fragment {
             startActivity(intent);
         });
 
-        view.findViewById(R.id.btn_sinup).setOnClickListener(view1 -> {
+        view.findViewById(R.id.tv_sign_up).setOnClickListener(view1 -> {
             navController.navigate(R.id.action_fragmentLogin_to_fragmentSignup);
         });
 
-        view.findViewById(R.id.btn_forget_password).setOnClickListener(view1 -> {
+        view.findViewById(R.id.tv_forgot_password).setOnClickListener(view1 -> {
             navController.navigate(R.id.action_fragmentLogin_to_fragmentForgetPassword);
         });
     }

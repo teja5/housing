@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#0080FF</color>
     <color name="bla">#181818</color>
+    <color name="bla_30">#30181818</color>
     <color name="whi">#F9F9F9</color>
     <color name="background">#DDDDDD</color>
 </resources>
