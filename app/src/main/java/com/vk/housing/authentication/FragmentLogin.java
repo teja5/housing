@@ -98,18 +98,21 @@ public class FragmentLogin extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        Map<String,String> signUp = new HashMap<>();
-//
-//        Injection.housingRepository(getActivity()).signup(signUp, new ResultCallBackListener() {
-//            @Override
-//            public void onSuccess(Object o) {
-//                Log.d("Success","CAled");
-//            }
-//
-//            @Override
-//            public void onFailure(Object o) {
-//                Log.d("Failure","CAled");
-//            }
-//        });
+        Map<String,String> signUp = new HashMap<>();
+        signUp.put("","");
+        signUp.put("","");
+
+
+        Injection.housingRepository(getActivity()).signup(signUp, new ResultCallBackListener() {
+            @Override
+            public void onSuccess(Object o) {
+                Log.d("Success","CAled");
+            }
+
+            @Override
+            public void onFailure(Object o) {
+                Log.d("Failure","CAled");
+            }
+        });
     }
 }
