@@ -32,4 +32,19 @@ public class HousingRepository implements HousingDataSource {
     public void signup(Map<String, String> signUpMap, ResultCallBackListener resultCallBackListener) {
         housingDataSourceRemote.signup(signUpMap,resultCallBackListener);
     }
+
+    @Override
+    public void login(Map<String, String> loginMap, ResultCallBackListener resultCallBackListener) {
+        housingDataSourceRemote.login(loginMap,resultCallBackListener);
+    }
+
+    @Override
+    public void forgotPassword(Map<String, String> forgotMap, ResultCallBackListener resultCallBackListener) {
+        housingDataSourceRemote.forgotPassword(forgotMap,resultCallBackListener);
+    }
+
+    @Override
+    public void resetPassword(Map<String, String> resetMap, ResultCallBackListener resultCallBackListener) {
+        housingDataSourceRemote.resetPassword(resetMap,resultCallBackListener);
+    }
 }

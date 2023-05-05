@@ -31,4 +31,19 @@ public class HousingRepository implements HousingDataSource {
     public void signup(Map<String, String> signUpMap, ResultCallBackListener resultCallBackListener) {
 
     }
+
+    @Override
+    public void login(Map<String, String> loginMap, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void forgotPassword(Map<String, String> forgotMap, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void resetPassword(Map<String, String> resetMap, ResultCallBackListener resultCallBackListener) {
+
+    }
 }

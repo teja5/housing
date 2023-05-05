@@ -15,9 +15,22 @@ import retrofit2.http.Url;
 
 public interface HousingApiInterface {
 
-    // Login call
+    // signup call
     @POST("user/signup")
-    Call<Object> signUp(@Body Map<String, String> loginData);
+    Call<Object> signUp(@Body Map<String, String> signupData);
+
+    // login call
+    @GET("user/login")
+    Call<Object> login(@Body Map<String, String> loginData);
+
+    // forgot password call
+    @GET("user/forgot_password")
+    Call<Object> forgotPassword(@Body Map<String, String> forgotPasswordData);
+
+    // update password call
+    @GET("user/updatePassword")
+    Call<Object> updatePassword(@Body Map<String, String> updatePasswordData);
+
 //
 //    // Reset call first Login
 //    @PUT("users/reset_firstlogin")
