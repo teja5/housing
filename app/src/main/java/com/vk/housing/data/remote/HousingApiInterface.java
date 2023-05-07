@@ -1,31 +1,36 @@
 package com.vk.housing.data.remote;
 
 
+import com.vk.housing.data.remote.dao.LoginResponse;
+import com.vk.housing.data.remote.dao.SignupResponse;
+
 import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.FieldMap;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public interface HousingApiInterface {
 
     // signup call
     @POST("user/signup")
-    Call<Object> signUp(@Body Map<String, String> signupData);
+    Call<SignupResponse> signUp(@Body Map<String, String> signupData);
 
     // login call
     @GET("user/login")
-    Call<Object> login(@Body Map<String, String> loginData);
+    Call<LoginResponse> login(@Query("user") String user,@Query("password") String password);
 
     // forgot password call
     @GET("user/forgot_password")
-    Call<Object> forgotPassword(@Body Map<String, String> forgotPasswordData);
+    Call<LoginResponse> forgotPassword(@Query("user") String user);
 
     // update password call
     @GET("user/updatePassword")

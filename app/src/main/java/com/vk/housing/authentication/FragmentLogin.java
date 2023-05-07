@@ -2,6 +2,9 @@ package com.vk.housing.authentication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,18 +12,14 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.vk.housing.Injection;
 import com.vk.housing.MainActivity;
 import com.vk.housing.R;
+import com.vk.housing.data.remote.dao.LoginResponse;
 import com.vk.housing.util.ResultCallBackListener;
+import com.vk.housing.util.Util;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,9 +80,27 @@ public class FragmentLogin extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final NavController navController = Navigation.findNavController(view);
-        view.findViewById(R.id.btn_login).setOnClickListener(view1 -> {
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
+        view.findViewById(R.id.btn_next).setOnClickListener(view1 -> {
+
+            HashMap<String, String> loginMap = new HashMap<>();
+            loginMap.put("user", Util.getString(view.findViewById(R.id.et_email)));
+            loginMap.put("password", Util.getString(view.findViewById(R.id.et_password)));
+            Injection.housingRepository(getActivity()).login(loginMap, new ResultCallBackListener() {
+                @Override
+                public void onSuccess(Object o) {
+
+                    LoginResponse loginResponse = (LoginResponse) o;
+                    Util.setUser(getActivity(), loginResponse.getUser());
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                }
+
+                @Override
+                public void onFailure(Object o) {
+                    String s = (String) o;
+                    Util.showError(getActivity(), s);
+                }
+            });
         });
 
         view.findViewById(R.id.tv_sign_up).setOnClickListener(view1 -> {
@@ -98,21 +115,5 @@ public class FragmentLogin extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Map<String,String> signUp = new HashMap<>();
-        signUp.put("","");
-        signUp.put("","");
-
-
-        Injection.housingRepository(getActivity()).signup(signUp, new ResultCallBackListener() {
-            @Override
-            public void onSuccess(Object o) {
-                Log.d("Success","CAled");
-            }
-
-            @Override
-            public void onFailure(Object o) {
-                Log.d("Failure","CAled");
-            }
-        });
     }
 }

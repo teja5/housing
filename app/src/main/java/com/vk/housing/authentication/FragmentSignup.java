@@ -12,7 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vk.housing.Injection;
 import com.vk.housing.R;
+import com.vk.housing.data.remote.dao.SignupResponse;
+import com.vk.housing.util.ResultCallBackListener;
+import com.vk.housing.util.Util;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,7 +81,28 @@ public class FragmentSignup extends Fragment {
         final NavController navController = Navigation.findNavController(view);
 
         view.findViewById(R.id.btn_signup).setOnClickListener(view1 -> {
-            navController.navigate(R.id.action_fragmentSignup_to_fragmentOtp);
+
+            Map<String,String> signupMap = new HashMap<>();
+            signupMap.put("name", Util.getString(view.findViewById(R.id.et_name)));
+            signupMap.put("phone", Util.getString(view.findViewById(R.id.et_phone)));
+            signupMap.put("email_id", Util.getString(view.findViewById(R.id.et_email)));
+            signupMap.put("password", Util.getString(view.findViewById(R.id.et_password)));
+            signupMap.put("login_type","1");
+            signupMap.put("otp","124");
+
+            Injection.housingRepository(getContext()).signup(signupMap, new ResultCallBackListener() {
+                @Override
+                public void onSuccess(Object o) {
+                    SignupResponse signupResponse = (SignupResponse) o;
+                    Util.setUser(getActivity(),signupResponse.getUser());
+                    navController.navigate(R.id.action_fragmentSignup_to_fragmentOtp);
+                }
+                @Override
+                public void onFailure(Object o) {
+                    String s = (String) o;
+                    Util.showError(getActivity(),s);
+                }
+            });
         });
 
         view.findViewById(R.id.tv_already_login).setOnClickListener(view1 -> {

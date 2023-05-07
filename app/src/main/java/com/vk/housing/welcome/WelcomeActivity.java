@@ -8,8 +8,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.vk.housing.MainActivity;
 import com.vk.housing.R;
 import com.vk.housing.authentication.AuthenticationActivity;
+import com.vk.housing.util.Util;
 
 import java.util.ArrayList;
 
@@ -41,5 +43,16 @@ public class WelcomeActivity extends AppCompatActivity {
             Intent intent = new Intent(this, AuthenticationActivity.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (Util.getUser(getApplication()).getUserId().toString().length() ==0){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

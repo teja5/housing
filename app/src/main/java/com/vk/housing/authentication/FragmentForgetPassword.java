@@ -1,14 +1,20 @@
 package com.vk.housing.authentication;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.vk.housing.Injection;
 import com.vk.housing.R;
+import com.vk.housing.util.ResultCallBackListener;
+import com.vk.housing.util.Util;
+
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,5 +68,29 @@ public class FragmentForgetPassword extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_forget_password, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        view.findViewById(R.id.btn_next).setOnClickListener(view1 -> {
+            HashMap<String, String> forgetPassword = new HashMap<>();
+            forgetPassword.put("user", Util.getString(view.findViewById(R.id.et_email)));
+            Injection.housingRepository(getActivity()).forgotPassword(forgetPassword, new ResultCallBackListener() {
+                @Override
+                public void onSuccess(Object o) {
+
+                    // move to otp
+
+                }
+
+                @Override
+                public void onFailure(Object o) {
+
+                    String s = (String) o;
+                    Util.showError(getActivity(), s);
+                }
+            });
+        });
     }
 }
