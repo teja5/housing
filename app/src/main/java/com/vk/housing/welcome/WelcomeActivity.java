@@ -49,7 +49,7 @@ public class WelcomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (Util.getUser(getApplication()).getUserId().toString().length() ==0){
+        if (Util.getUser(this) != null && Util.getUser(getApplication()).getUserId().toString().length() !=0){
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();

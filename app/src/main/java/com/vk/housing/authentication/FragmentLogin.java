@@ -93,6 +93,7 @@ public class FragmentLogin extends Fragment {
                     Util.setUser(getActivity(), loginResponse.getUser());
                     Intent intent = new Intent(getActivity(), MainActivity.class);
                     startActivity(intent);
+                    getActivity().finish();
                 }
 
                 @Override
