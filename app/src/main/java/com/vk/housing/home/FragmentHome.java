@@ -3,19 +3,26 @@ package com.vk.housing.home;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.vk.housing.R;
+import com.vk.housing.adapter.HomeAdapter;
+import com.vk.housing.data.remote.dao.Property;
+import com.vk.housing.util.OnItemClickListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentHome#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentHome extends Fragment {
+public class FragmentHome extends Fragment implements OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +32,10 @@ public class FragmentHome extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    RecyclerView rv_properties;
+    HomeAdapter homeAdapter;
+    ArrayList<Property> properties;
 
     public FragmentHome() {
         // Required empty public constructor
@@ -61,7 +72,27 @@ public class FragmentHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        rv_properties = view.findViewById(R.id.rv_properties);
+        rv_properties.setLayoutManager(new LinearLayoutManager(
+                getActivity(),
+                LinearLayoutManager.HORIZONTAL,
+                false));
+        properties = new ArrayList<>();
+        Property property = new Property();
+        property.setpAddress("Hydearabad");
+        properties.add(property);
+        Property property1 = new Property();
+        property1.setpAddress("Vijayawada");
+        properties.add(property1);
+        homeAdapter = new HomeAdapter(properties, getActivity(), this);
+        rv_properties.setAdapter(homeAdapter);
+
+        return view;
     }
 
+    @Override
+    public void onItemClickListener(int position, Property property) {
+
+    }
 }
