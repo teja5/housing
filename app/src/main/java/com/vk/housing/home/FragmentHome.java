@@ -1,17 +1,22 @@
 package com.vk.housing.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.tabs.TabLayout;
 import com.vk.housing.R;
 import com.vk.housing.adapter.HomeAdapter;
+import com.vk.housing.adapter.HomeFragmentAdapter;
 import com.vk.housing.data.remote.dao.Property;
 import com.vk.housing.util.OnItemClickListener;
 
@@ -62,6 +67,7 @@ public class FragmentHome extends Fragment implements OnItemClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -88,11 +94,31 @@ public class FragmentHome extends Fragment implements OnItemClickListener {
         homeAdapter = new HomeAdapter(properties, getActivity(), this);
         rv_properties.setAdapter(homeAdapter);
 
+        ViewPager viewPager =  view.findViewById(R.id.pager_view);
+        setupViewPager(viewPager);
+        // Set Tabs inside Toolbar
+        TabLayout tabs = view.findViewById(R.id.tabLayout);
+        tabs.setupWithViewPager(viewPager);
+
         return view;
+    }
+
+    // Add Fragments to Tabs
+    private void setupViewPager(ViewPager viewPager) {
+
+
+        HomeFragmentAdapter adapter = new HomeFragmentAdapter(getChildFragmentManager());
+        adapter.addFragment(new FragmentBuy(), "Buy");
+        adapter.addFragment(new FragmentRent(), "Rent");
+        adapter.addFragment(new FragmentCommercial(), "Commercial");
+        viewPager.setAdapter(adapter);
+
     }
 
     @Override
     public void onItemClickListener(int position, Property property) {
 
+        Intent intent = new Intent(getActivity(),PropertyDetailsActivity.class);
+        startActivity(intent);
     }
 }

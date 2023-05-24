@@ -28,6 +28,7 @@
             android:name=".MainActivity">
         </activity>
         <activity android:name=".settings.SettingsActivity"></activity>
+        <activity android:name=".home.PropertyDetailsActivity"></activity>
     </application>
 
 </manifest>
