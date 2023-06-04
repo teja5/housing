@@ -7,15 +7,21 @@
 
     <application
         android:allowBackup="true"
-        android:networkSecurityConfig="@xml/network_security_config"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.Housing">
-
-        <activity android:name=".welcome.WelcomeActivity"
+        android:theme="@style/Theme.Housing"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".home.StatusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".home.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".welcome.WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,12 +29,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".authentication.AuthenticationActivity"/>
-        <activity
-            android:name=".MainActivity">
-        </activity>
-        <activity android:name=".settings.SettingsActivity"></activity>
-        <activity android:name=".home.PropertyDetailsActivity"></activity>
+        <activity android:name=".authentication.AuthenticationActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".settings.SettingsActivity" />
+        <activity android:name=".home.PropertyDetailsActivity" />
     </application>
 
 </manifest>

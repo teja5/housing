@@ -1,6 +1,9 @@
 package com.vk.housing;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -9,6 +12,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.vk.housing.home.FragmentAdd;
 import com.vk.housing.home.FragmentHome;
 import com.vk.housing.home.FragmentProfile;
+import com.vk.housing.home.SearchActivity;
+import com.vk.housing.home.StatusActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,5 +48,42 @@ public class MainActivity extends AppCompatActivity {
                     selectedFragment).commit();
             return true;
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.mn_status) {
+            Intent statusIntent = new Intent(MainActivity.this, StatusActivity.class);
+            startActivity(statusIntent);
+            // Do something
+            return true;
+        }
+        if (id == R.id.mn_search) {
+            Intent searchIntent = new Intent(MainActivity.this, SearchActivity.class);
+            startActivity(searchIntent);
+            // Do something
+            return true;
+        }
+
+        if (id == R.id.mn_notification) {
+
+            // Do something
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 }
