@@ -22,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HousingClient {
 
 //    public static final String BASE_URL = "https://sandbox.eisedo.com/";
-    public static final String BASE_URL = "http://184.72.6.13:8080/housing/";
+    public static final String BASE_URL = "http://52.53.251.27:8080/housing/";
 //    public static final String BASE_URL = "https://dofirst.co.uk/";
 //    Retrofit retrofit = new Retrofit.Builder()
 //            .baseUrl(BASE_URL)m

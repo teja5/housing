@@ -18,7 +18,7 @@
             android:name=".home.StatusActivity"
             android:exported="false" />
         <activity
-            android:name=".home.SearchActivity"
+            android:name=".search.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".welcome.WelcomeActivity"
@@ -32,6 +32,7 @@
         <activity android:name=".authentication.AuthenticationActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".settings.SettingsActivity" />
+        <activity android:name=".property.AddProperty"/>
         <activity android:name=".home.PropertyDetailsActivity" />
     </application>
 

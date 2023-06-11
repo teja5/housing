@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.vk.housing.home.FragmentAdd;
 import com.vk.housing.home.FragmentHome;
 import com.vk.housing.home.FragmentProfile;
-import com.vk.housing.home.SearchActivity;
+import com.vk.housing.search.SearchActivity;
 import com.vk.housing.home.StatusActivity;
 
 public class MainActivity extends AppCompatActivity {

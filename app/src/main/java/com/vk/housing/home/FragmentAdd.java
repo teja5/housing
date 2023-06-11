@@ -1,5 +1,6 @@
 package com.vk.housing.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vk.housing.R;
+import com.vk.housing.property.AddProperty;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +63,11 @@ public class FragmentAdd extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add, container, false);
+        View view = inflater.inflate(R.layout.fragment_add, container, false);
+        view.findViewById(R.id.button).setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), AddProperty.class);
+            startActivity(intent);
+        });
+        return view;
     }
 }

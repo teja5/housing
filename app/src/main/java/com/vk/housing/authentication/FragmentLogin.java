@@ -81,30 +81,30 @@ public class FragmentLogin extends Fragment {
 
         final NavController navController = Navigation.findNavController(view);
         view.findViewById(R.id.btn_next).setOnClickListener(view1 -> {
+//
+//            Intent intent = new Intent(getActivity(), MainActivity.class);
+//            startActivity(intent);
+//            getActivity().finish();
+            HashMap<String, String> loginMap = new HashMap<>();
+            loginMap.put("user", Util.getString(view.findViewById(R.id.et_email)));
+            loginMap.put("password", Util.getString(view.findViewById(R.id.et_password)));
+            Injection.housingRepository(getActivity()).login(loginMap, new ResultCallBackListener() {
+                @Override
+                public void onSuccess(Object o) {
 
-            Intent intent = new Intent(getActivity(), MainActivity.class);
-            startActivity(intent);
-            getActivity().finish();
-//            HashMap<String, String> loginMap = new HashMap<>();
-//            loginMap.put("user", Util.getString(view.findViewById(R.id.et_email)));
-//            loginMap.put("password", Util.getString(view.findViewById(R.id.et_password)));
-//            Injection.housingRepository(getActivity()).login(loginMap, new ResultCallBackListener() {
-//                @Override
-//                public void onSuccess(Object o) {
-//
-//                    LoginResponse loginResponse = (LoginResponse) o;
-//                    Util.setUser(getActivity(), loginResponse.getUser());
-//                    Intent intent = new Intent(getActivity(), MainActivity.class);
-//                    startActivity(intent);
-//                    getActivity().finish();
-//                }
-//
-//                @Override
-//                public void onFailure(Object o) {
-//                    String s = (String) o;
-//                    Util.showError(getActivity(), s);
-//                }
-//            });
+                    LoginResponse loginResponse = (LoginResponse) o;
+                    Util.setUser(getActivity(), loginResponse.getUser());
+                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+
+                @Override
+                public void onFailure(Object o) {
+                    String s = (String) o;
+                    Util.showError(getActivity(), s);
+                }
+            });
         });
 
         view.findViewById(R.id.tv_sign_up).setOnClickListener(view1 -> {

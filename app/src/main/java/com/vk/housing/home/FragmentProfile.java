@@ -13,15 +13,24 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.vk.housing.R;
+import com.vk.housing.adapter.HomeAdapter;
+import com.vk.housing.adapter.ProfileAdapter;
+import com.vk.housing.data.remote.dao.Property;
+import com.vk.housing.settings.SettingsActivity;
+import com.vk.housing.util.OnItemClickListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentProfile#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentProfile extends Fragment {
+public class FragmentProfile extends Fragment implements OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,6 +42,12 @@ public class FragmentProfile extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    RecyclerView rv_profile_items;
+
+    ProfileAdapter profileAdapter;
+
+    ArrayList<Property> properties;
 
     public FragmentProfile() {
         // Required empty public constructor
@@ -77,6 +92,22 @@ public class FragmentProfile extends Fragment {
 //            startActivity(intent);
             imageDialog();
         });
+
+        rv_profile_items = view.findViewById(R.id.rv_profile_items);
+        rv_profile_items.setLayoutManager(new LinearLayoutManager(
+                getActivity(),
+                LinearLayoutManager.VERTICAL,
+                false));
+        properties = new ArrayList<>();
+        Property property = new Property();
+        property.setpAddress("Hydearabad");
+        properties.add(property);
+        Property property1 = new Property();
+        property1.setpAddress("Vijayawada");
+        properties.add(property1);
+        profileAdapter = new ProfileAdapter(properties, getActivity(), this);
+        rv_profile_items.setAdapter(profileAdapter);
+
         return view;
     }
 
@@ -139,5 +170,11 @@ public class FragmentProfile extends Fragment {
                 iv_pic.setImageBitmap(photo);
             }
         }
+    }
+
+    @Override
+    public void onItemClickListener(int position, Property property) {
+        Intent intent = new Intent(getActivity(),SettingsActivity.class);
+        startActivity(intent);
     }
 }

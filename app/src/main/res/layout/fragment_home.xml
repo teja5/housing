@@ -8,6 +8,7 @@
     tools:context=".home.FragmentHome">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:background="@color/background"
         android:layout_height="match_parent">
 
         <ImageView
@@ -69,7 +70,7 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/pager_view"
             android:layout_width="0dp"
-            android:layout_height="300dp"
+            android:layout_height="200dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
