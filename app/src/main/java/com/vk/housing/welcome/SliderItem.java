@@ -2,10 +2,11 @@ package com.vk.housing.welcome;
 
 public class SliderItem {
 
-    String title;
+    String title,text;
 
-    public SliderItem(String title) {
+    public SliderItem(String title, String text) {
         this.title = title;
+        this.text= text;
     }
 
     public String getTitle() {
@@ -14,5 +15,13 @@ public class SliderItem {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

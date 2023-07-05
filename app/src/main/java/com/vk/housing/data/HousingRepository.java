@@ -46,4 +46,39 @@ public class HousingRepository implements HousingDataSource {
     public void resetPassword(Map<String, String> resetMap, ResultCallBackListener resultCallBackListener) {
 
     }
+
+    @Override
+    public void addProperty(Map<String, String> propertyMap, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void updateProperty(Map<String, String> propertyMap, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void addFavourite(Map<String, String> favouriteMap, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void getUserFavouriteProperties(Map<String, String> userFavouriteMap, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void getPropertiesList(Map<String, String> propertyMap, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void getPropertyById(Map<String, String> propertyMap, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void deleteProperty(Map<String, String> deletePropertyMap, ResultCallBackListener resultCallBackListener) {
+
+    }
 }

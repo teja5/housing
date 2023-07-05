@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/property_nav"
+    app:startDestination="@id/propertyDetailsFragment">
+
+    <fragment
+        android:id="@+id/propertyDetailsFragment"
+        android:name="com.vk.housing.property.PropertyDetailsFragment"
+        android:label="fragment_property_details"
+        tools:layout="@layout/fragment_property_details" >
+        <action
+            android:id="@+id/action_propertyDetailsFragment_to_propertyAddressFragment"
+            app:destination="@id/propertyAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/propertyAddressFragment"
+        android:name="com.vk.housing.property.PropertyAddressFragment"
+        android:label="fragment_property_address"
+        tools:layout="@layout/fragment_property_address" >
+        <action
+            android:id="@+id/action_propertyAddressFragment_to_propertyImagesFragment"
+            app:destination="@id/propertyImagesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/propertyImagesFragment"
+        android:name="com.vk.housing.property.PropertyImagesFragment"
+        android:label="fragment_property_images"
+        tools:layout="@layout/fragment_property_images" />
+</navigation>

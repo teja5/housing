@@ -27,7 +27,7 @@
         app:srcCompat="@drawable/slide_1" />
 
     <Button
-        android:id="@+id/iv_btn_next"
+        android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
@@ -39,26 +39,26 @@
         android:background="@drawable/next" />
 
     <TextView
-        android:id="@+id/iv_skip"
+        android:id="@+id/tv_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:text="@string/skip"
         style="@style/skip"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_btn_next"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_next"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_btn_next" />
+        app:layout_constraintTop_toTopOf="@+id/btn_next" />
 
     <TextView
         android:id="@+id/tv_slider_two"
         style="@style/slider_text_two"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginBottom="8dp"
         android:text="@string/slide_one_text_two"
-        app:layout_constraintBottom_toTopOf="@+id/iv_btn_next"
+        app:layout_constraintBottom_toTopOf="@+id/btn_next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />

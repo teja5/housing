@@ -36,6 +36,9 @@ public interface HousingApiInterface {
     @GET("user/updatePassword")
     Call<Object> updatePassword(@Body Map<String, String> updatePasswordData);
 
+    @POST("property/add")
+    Call<Object> addProperty(@Body Map<String, String> signupData);
+
 //
 //    // Reset call first Login
 //    @PUT("users/reset_firstlogin")

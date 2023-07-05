@@ -12,5 +12,9 @@
     <string name="email_or_mobile">Email or mobile</string>
     <string name="forgot_password">Forgot Password ?</string>
     <string name="signup">Sign Up</string>
+    <string name="rent">Rent</string>
+    <string name="sell">Sell</string>
+    <string name="basic_info">Basic Info</string>
+    <string name="ihave">I have</string>
 
 </resources>

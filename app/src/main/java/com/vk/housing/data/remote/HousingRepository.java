@@ -47,4 +47,39 @@ public class HousingRepository implements HousingDataSource {
     public void resetPassword(Map<String, String> resetMap, ResultCallBackListener resultCallBackListener) {
         housingDataSourceRemote.resetPassword(resetMap,resultCallBackListener);
     }
+
+    @Override
+    public void addProperty(Map<String, String> propertyMap, ResultCallBackListener resultCallBackListener) {
+        housingDataSourceRemote.addProperty(propertyMap,resultCallBackListener);
+    }
+
+    @Override
+    public void updateProperty(Map<String, String> propertyMap, ResultCallBackListener resultCallBackListener) {
+        housingDataSourceRemote.updateProperty(propertyMap,resultCallBackListener);
+    }
+
+    @Override
+    public void addFavourite(Map<String, String> favouriteMap, ResultCallBackListener resultCallBackListener) {
+        housingDataSourceRemote.addFavourite(favouriteMap,resultCallBackListener);
+    }
+
+    @Override
+    public void getUserFavouriteProperties(Map<String, String> userFavouriteMap, ResultCallBackListener resultCallBackListener) {
+        housingDataSourceRemote.getUserFavouriteProperties(userFavouriteMap,resultCallBackListener);
+    }
+
+    @Override
+    public void getPropertiesList(Map<String, String> propertyMap, ResultCallBackListener resultCallBackListener) {
+        housingDataSourceRemote.getPropertiesList(propertyMap,resultCallBackListener);
+    }
+
+    @Override
+    public void getPropertyById(Map<String, String> propertyMap, ResultCallBackListener resultCallBackListener) {
+        housingDataSourceRemote.getPropertyById(propertyMap,resultCallBackListener);
+    }
+
+    @Override
+    public void deleteProperty(Map<String, String> deletePropertyMap, ResultCallBackListener resultCallBackListener) {
+        housingDataSourceRemote.deleteProperty(deletePropertyMap,resultCallBackListener);
+    }
 }

@@ -14,4 +14,17 @@ public interface HousingDataSource {
 
     void resetPassword(Map<String, String> resetMap, ResultCallBackListener resultCallBackListener);
 
+    void addProperty(Map<String,String> propertyMap,ResultCallBackListener resultCallBackListener);
+
+    void updateProperty(Map<String,String> propertyMap,ResultCallBackListener resultCallBackListener);
+
+    void addFavourite(Map<String,String> favouriteMap,ResultCallBackListener resultCallBackListener);
+
+    void getUserFavouriteProperties(Map<String,String> userFavouriteMap, ResultCallBackListener resultCallBackListener);
+
+    void getPropertiesList(Map<String,String> propertyMap, ResultCallBackListener resultCallBackListener);
+
+    void getPropertyById(Map<String,String> propertyMap,ResultCallBackListener resultCallBackListener);
+
+    void deleteProperty(Map<String,String> deletePropertyMap, ResultCallBackListener resultCallBackListener);
 }

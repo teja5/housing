@@ -162,4 +162,80 @@ public class HousingRemoteDataRepository implements HousingDataSource {
     public void resetPassword(Map<String, String> resetMap, ResultCallBackListener resultCallBackListener) {
 
     }
+
+    @Override
+    public void addProperty(Map<String, String> propertyMap, ResultCallBackListener resultCallBackListener) {
+
+        housingApiInterface.addProperty(propertyMap).enqueue(new Callback<Object>() {
+            @Override
+            public void onResponse(Call<Object> call, Response<Object> response) {
+
+                if (response.isSuccessful()) {
+
+                    Log.d("Response",response.toString());
+
+//                    LoginResponse loginResponse = response.body();
+//
+//                    if (loginResponse.getStatus() == 202) {
+//                        resultCallBackListener.onSuccess(response.body());
+//                    }else {
+//                        resultCallBackListener.onFailure(loginResponse.getError().getErrorMessage());
+//                    }
+
+                } else {
+                    switch (response.code()) {
+                        case 401:
+                            resultCallBackListener.onFailure("Unauthorized");
+                            break;
+                        case 404:
+                            resultCallBackListener.onFailure("Not Found");
+                            break;
+                        case 500:
+                            resultCallBackListener.onFailure("No Response from server");
+                            break;
+                        default:
+                            resultCallBackListener.onFailure("Unknown Error");
+                            break;
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<Object> call, Throwable t) {
+                resultCallBackListener.onFailure("Could not connect to server please try again");
+            }
+        });
+
+    }
+
+    @Override
+    public void updateProperty(Map<String, String> propertyMap, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void addFavourite(Map<String, String> favouriteMap, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void getUserFavouriteProperties(Map<String, String> userFavouriteMap, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void getPropertiesList(Map<String, String> propertyMap, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void getPropertyById(Map<String, String> propertyMap, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void deleteProperty(Map<String, String> deletePropertyMap, ResultCallBackListener resultCallBackListener) {
+
+    }
 }
