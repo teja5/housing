@@ -3,35 +3,59 @@ package com.vk.housing.data.remote.dao;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class Property {
 
-    @SerializedName("property_id")
+    @SerializedName("parking")
     @Expose
-    private Integer propertyId;
-    @SerializedName("property_for")
-    @Expose
-    private Integer propertyFor;
-    @SerializedName("building_type")
-    @Expose
-    private Integer buildingType;
-    @SerializedName("construction_status")
-    @Expose
-    private Integer constructionStatus;
+    private Integer parking;
     @SerializedName("age_of_property")
     @Expose
     private Integer ageOfProperty;
-    @SerializedName("p_address")
+    @SerializedName("property_for")
     @Expose
-    private String pAddress;
-    @SerializedName("p_phone")
+    private Integer propertyFor;
+    @SerializedName("images")
     @Expose
-    private String pPhone;
+    private List<List<Object>> images;
     @SerializedName("bhk")
     @Expose
     private Integer bhk;
+    @SerializedName("balcony")
+    @Expose
+    private Integer balcony;
+    @SerializedName("p_phone")
+    @Expose
+    private String pPhone;
+    @SerializedName("property_id")
+    @Expose
+    private Integer propertyId;
     @SerializedName("uid")
     @Expose
     private Integer uid;
+    @SerializedName("p_address")
+    @Expose
+    private String pAddress;
+    @SerializedName("bath_room")
+    @Expose
+    private Integer bathRoom;
+    @SerializedName("property_type")
+    @Expose
+    private Integer propertyType;
+    @SerializedName("construction_status")
+    @Expose
+    private Integer constructionStatus;
+    @SerializedName("furnish_type")
+    @Expose
+    private Integer furnishType;
+    @SerializedName("building_type")
+    @Expose
+    private Integer buildingType;
+    @SerializedName("image_path")
+    @Expose
+    private String imagePath;
+
 
     public Integer getPropertyId() {
         return propertyId;
@@ -103,5 +127,61 @@ public class Property {
 
     public void setUid(Integer uid) {
         this.uid = uid;
+    }
+
+    public Integer getParking() {
+        return parking;
+    }
+
+    public void setParking(Integer parking) {
+        this.parking = parking;
+    }
+
+    public List<List<Object>> getImages() {
+        return images;
+    }
+
+    public void setImages(List<List<Object>> images) {
+        this.images = images;
+    }
+
+    public Integer getBalcony() {
+        return balcony;
+    }
+
+    public void setBalcony(Integer balcony) {
+        this.balcony = balcony;
+    }
+
+    public Integer getBathRoom() {
+        return bathRoom;
+    }
+
+    public void setBathRoom(Integer bathRoom) {
+        this.bathRoom = bathRoom;
+    }
+
+    public Integer getPropertyType() {
+        return propertyType;
+    }
+
+    public void setPropertyType(Integer propertyType) {
+        this.propertyType = propertyType;
+    }
+
+    public Integer getFurnishType() {
+        return furnishType;
+    }
+
+    public void setFurnishType(Integer furnishType) {
+        this.furnishType = furnishType;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

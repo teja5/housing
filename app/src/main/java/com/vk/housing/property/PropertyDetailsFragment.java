@@ -48,7 +48,8 @@ public class PropertyDetailsFragment extends Fragment {
      */
     // TODO: Rename and change types and number of parameters
     public static PropertyDetailsFragment newInstance(String param1, String param2) {
-        PropertyDetailsFragment fragment = new PropertyDetailsFragment();
+        PropertyDetailsFragment fragment = new
+                PropertyDetailsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
