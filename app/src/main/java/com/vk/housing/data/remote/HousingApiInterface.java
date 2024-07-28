@@ -6,11 +6,13 @@ import com.vk.housing.data.remote.dao.LoginResponse;
 import com.vk.housing.data.remote.dao.PropertyListResponse;
 import com.vk.housing.data.remote.dao.PropertyResponse;
 import com.vk.housing.data.remote.dao.SignupResponse;
+import com.vk.housing.welcome.Dealer;
 
 import java.util.List;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.FieldMap;
@@ -20,6 +22,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
@@ -80,6 +83,13 @@ public interface HousingApiInterface {
 
     @Multipart
     @POST("property/uploadPropertyImage")
-    Call<Object> uploadPhoto(@Part("propertyId") String propertyId, @Part("image") MultipartBody.Part imageFile);
+    Call<Object> uploadPhoto(@Part("propertyId") long propertyId, @Part("image") RequestBody imageFile);
 
+    @Multipart
+    @POST("imageOrder")
+    Call<Object> uploadPhotoTest(@Part("user_id") RequestBody propertyId, @Part List<MultipartBody.Part>  imageFiles);
+
+    @Multipart
+    @POST("imageOrder")
+    Call<Object> uploadPhotoTest1(@PartMap Map<String, RequestBody> params);
 }

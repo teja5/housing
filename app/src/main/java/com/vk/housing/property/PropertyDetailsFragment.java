@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 
 import com.vk.housing.Injection;
 import com.vk.housing.R;
+import com.vk.housing.data.remote.dao.PropertyResponse;
 import com.vk.housing.util.ResultCallBackListener;
 import com.vk.housing.util.Util;
 
@@ -188,10 +189,10 @@ public class PropertyDetailsFragment extends Fragment {
             propertyMap.put("offers_any", Util.getString(view.findViewById(R.id.et_comments)));
             propertyMap.put("p_address", "address");
             propertyMap.put("p_phone", "phone");
-//            addProperty(propertyMap);
+            addProperty(propertyMap);
             Bundle bundle = new Bundle();
             bundle.putString("property_id",1+"");
-            navController.navigate(R.id.action_propertyDetailsFragment_to_propertyAddressFragment,bundle);
+//            navController.navigate(R.id.action_propertyDetailsFragment_to_propertyAddressFragment,bundle);
 
         });
     }
@@ -200,8 +201,9 @@ public class PropertyDetailsFragment extends Fragment {
         Injection.housingRepository(getActivity()).addProperty(propertyMap, new ResultCallBackListener() {
             @Override
             public void onSuccess(Object o) {
+                PropertyResponse propertyResponse = (PropertyResponse) o;
                 Bundle bundle = new Bundle();
-                bundle.putLong("property_id",1);
+                bundle.putLong("property_id",propertyResponse.getProperty().getPropertyId());
                 navController.navigate(R.id.action_propertyDetailsFragment_to_propertyAddressFragment,bundle);
             }
 

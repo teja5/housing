@@ -81,4 +81,20 @@ public class HousingRepository implements HousingDataSource {
     public void deleteProperty(Map<String, String> deletePropertyMap, ResultCallBackListener resultCallBackListener) {
 
     }
+
+
+    @Override
+    public void uploadImage(long property_id, String filepath, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void favouriteProperty(int f_id, int user_id, int property_id, ResultCallBackListener resultCallBackListener) {
+
+    }
+
+    @Override
+    public void uploadImage(String filepath, ResultCallBackListener resultCallBackListener) {
+
+    }
 }

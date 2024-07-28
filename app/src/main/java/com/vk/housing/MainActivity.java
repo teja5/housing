@@ -2,10 +2,12 @@ package com.vk.housing;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,6 +29,15 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new FragmentHome()).commit();
         }
+        Toolbar main_toolbar = findViewById(R.id.main_toolbar);
+        setSupportActionBar(main_toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.main_header);
+
+        main_toolbar.findViewById(R.id.cl_layout).setOnClickListener(v -> {
+            Log.d("Clicked", "Toolbar");
+        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.btm_nav_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(item -> {

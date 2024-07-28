@@ -1,5 +1,7 @@
 package com.vk.housing.data.remote;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.vk.housing.BuildConfig;
 
 import java.security.KeyManagementException;
@@ -18,11 +20,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class HousingClient {
 
 //    public static final String BASE_URL = "https://sandbox.eisedo.com/";
-    public static final String BASE_URL = "http://52.53.251.27:8080/housing/";
+    public static final String BASE_URL = "http://3.110.46.26:8080/shopST/";
 //    public static final String BASE_URL = "https://dofirst.co.uk/";
 //    Retrofit retrofit = new Retrofit.Builder()
 //            .baseUrl(BASE_URL)m
@@ -85,9 +88,13 @@ public class HousingClient {
             client.addInterceptor(interceptor);
         }
 
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
         retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(ScalarsConverterFactory.create()) //important
                 .client(client.build())
                 .build();
 

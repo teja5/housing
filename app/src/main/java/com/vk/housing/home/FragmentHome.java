@@ -9,18 +9,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.tabs.TabLayout;
+import com.vk.housing.Injection;
 import com.vk.housing.R;
 import com.vk.housing.adapter.HomeAdapter;
 import com.vk.housing.adapter.HomeFragmentAdapter;
+import com.vk.housing.data.remote.dao.FavouriteResponse;
 import com.vk.housing.data.remote.dao.Property;
+import com.vk.housing.data.remote.dao.PropertyListResponse;
 import com.vk.housing.util.OnItemClickListener;
+import com.vk.housing.util.ResultCallBackListener;
+import com.vk.housing.util.Util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,13 +101,46 @@ public class FragmentHome extends Fragment implements OnItemClickListener {
         homeAdapter = new HomeAdapter(properties, getActivity(), this);
         rv_properties.setAdapter(homeAdapter);
 
-        ViewPager viewPager =  view.findViewById(R.id.pager_view);
+        ViewPager viewPager = view.findViewById(R.id.pager_view);
         setupViewPager(viewPager);
         // Set Tabs inside Toolbar
         TabLayout tabs = view.findViewById(R.id.tabLayout);
         tabs.setupWithViewPager(viewPager);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getNearByProperties();
+    }
+
+    //TODO Replace Nearby Properties
+    void getNearByProperties() {
+        HashMap<String, String> getList = new HashMap<>();
+        getList.put("firstResult", "0");
+        getList.put("max", "10");
+        Injection.housingRepository(getActivity()).getPropertiesList(getList, new ResultCallBackListener() {
+            @Override
+            public void onSuccess(Object o) {
+
+                PropertyListResponse propertyListResponse = (PropertyListResponse) o;
+                Log.d("PropertyList", propertyListResponse.getPropertyList().size() + "");
+
+                properties = new ArrayList<>();
+                for (Property property : propertyListResponse.getPropertyList()) {
+                    properties.add(property);
+                }
+                homeAdapter = new HomeAdapter(properties, getActivity(), FragmentHome.this::onItemClickListener);
+                rv_properties.setAdapter(homeAdapter);
+            }
+
+            @Override
+            public void onFailure(Object o) {
+
+            }
+        });
     }
 
     // Add Fragments to Tabs
@@ -118,7 +158,24 @@ public class FragmentHome extends Fragment implements OnItemClickListener {
     @Override
     public void onItemClickListener(int position, Property property) {
 
-        Intent intent = new Intent(getActivity(),PropertyDetailsActivity.class);
-        startActivity(intent);
+        if (position == -1) {
+
+            Injection.housingRepository(getActivity()).favouriteProperty(0, Util.getUser(getContext()).getUserId(), property.getPropertyId(), new ResultCallBackListener() {
+                @Override
+                public void onSuccess(Object o) {
+                    FavouriteResponse favouriteResponse = (FavouriteResponse) o;
+                    Log.d("Favaourite", favouriteResponse.getStatus().toString());
+                }
+
+                @Override
+                public void onFailure(Object o) {
+
+                }
+            });
+
+        } else {
+            Intent intent = new Intent(getActivity(), PropertyDetailsActivity.class);
+            startActivity(intent);
+        }
     }
 }

@@ -11,59 +11,57 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.vk.housing.R;
-import com.vk.housing.data.remote.dao.Property;
-import com.vk.housing.util.OnItemClickListener;
+import com.vk.housing.data.remote.dao.Settings;
+import com.vk.housing.util.OnActionClickListener;
 
 import java.util.ArrayList;
 
 public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.HomeViewHolder> {
 
-    private ArrayList<Property> properties;
+    private ArrayList<Settings> settings;
 
     private Context context;
 
-    private OnItemClickListener itemClickListener;
+    private OnActionClickListener onActionClickListener;
 
-    public ProfileAdapter(ArrayList<Property> properties, Context context, OnItemClickListener itemClickListener) {
-        this.properties = properties;
+    public ProfileAdapter(ArrayList<Settings> settings, Context context, OnActionClickListener onActionClickListener) {
+        this.settings = settings;
         this.context = context;
-        this.itemClickListener = itemClickListener;
+        this.onActionClickListener = onActionClickListener;
     }
 
     @NonNull
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.property_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.setting_item, viewGroup, false);
         return new HomeViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder homeViewHolder, int i) {
-        Property property = properties.get(i);
 
-        homeViewHolder.tv_property_address.setText(property.getpAddress());
-
-        homeViewHolder.iv_property_item.setOnClickListener(view -> itemClickListener.onItemClickListener(i,property));
+        Settings setting = settings.get(i);
+        homeViewHolder.tv_name_setting.setText(setting.getName());
+        homeViewHolder.iv_name.setOnClickListener(view -> onActionClickListener.onItemClickListener(i, setting));
 
     }
 
     @Override
     public int getItemCount() {
-        return properties.size();
+        return settings.size();
     }
 
 
     public class HomeViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView tv_property_address;
+        private TextView tv_name_setting;
 
-        private ImageView iv_property_item;
+        private ImageView iv_name;
 
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
-            tv_property_address = itemView.findViewById(R.id.tv_property_address);
-            iv_property_item = itemView.findViewById(R.id.iv_property_item);
+            tv_name_setting = itemView.findViewById(R.id.tv_name_setting);
+            iv_name = itemView.findViewById(R.id.iv_name);
         }
     }
-
 }

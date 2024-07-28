@@ -29,7 +29,7 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">#181818</item>
     </style>
-    <style name="Theme.Housing.Main" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Housing.Main" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/white</item>

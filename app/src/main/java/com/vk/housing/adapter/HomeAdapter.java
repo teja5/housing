@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.vk.housing.R;
 import com.vk.housing.data.remote.dao.Property;
 import com.vk.housing.util.OnItemClickListener;
@@ -45,6 +46,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
         homeViewHolder.iv_property_item.setOnClickListener(view -> itemClickListener.onItemClickListener(i,property));
 
+        homeViewHolder.iv_favourite.setOnClickListener(v -> itemClickListener.onItemClickListener(-1,property));
+
+        Glide.with(context).load("https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-980x653.jpg").into(homeViewHolder.iv_property_item);
     }
 
     @Override
@@ -57,12 +61,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
         private TextView tv_property_address;
 
-        private ImageView iv_property_item;
+        private ImageView iv_property_item,iv_favourite;
 
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_property_address = itemView.findViewById(R.id.tv_property_address);
             iv_property_item = itemView.findViewById(R.id.iv_property_item);
+            iv_favourite = itemView.findViewById(R.id.iv_favourite);
         }
     }
 

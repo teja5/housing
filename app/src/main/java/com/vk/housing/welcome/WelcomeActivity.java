@@ -2,7 +2,6 @@ package com.vk.housing.welcome;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,9 +12,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.vk.housing.MainActivity;
 import com.vk.housing.R;
 import com.vk.housing.authentication.AuthenticationActivity;
-import com.vk.housing.data.remote.dao.Property;
 import com.vk.housing.util.OnActionClickListener;
-import com.vk.housing.util.OnItemClickListener;
 import com.vk.housing.util.Util;
 
 import java.util.ArrayList;

@@ -27,4 +27,11 @@ public interface HousingDataSource {
     void getPropertyById(Map<String,String> propertyMap,ResultCallBackListener resultCallBackListener);
 
     void deleteProperty(Map<String,String> deletePropertyMap, ResultCallBackListener resultCallBackListener);
+
+    void uploadImage(long property_id, String filepath, ResultCallBackListener resultCallBackListener);
+
+    void favouriteProperty(int f_id,int user_id,int property_id, ResultCallBackListener resultCallBackListener);
+
+    void uploadImage(String filepath, ResultCallBackListener resultCallBackListener);
+
 }

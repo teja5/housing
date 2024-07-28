@@ -3,18 +3,21 @@ package com.vk.housing.home;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.vk.housing.R;
+import com.vk.housing.adapter.HomeAdapter;
+import com.vk.housing.adapter.PropertyTypeAdapter;
+import com.vk.housing.data.remote.dao.PropertyType;
+import com.vk.housing.util.OnActionClickListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentBuy#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class FragmentBuy extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -30,14 +33,12 @@ public class FragmentBuy extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentBuy.
-     */
+    RecyclerView rv_property_options;
+
+    PropertyTypeAdapter propertyTypeAdapter;
+
+    ArrayList<PropertyType> propertyTypes;
+
     // TODO: Rename and change types and number of parameters
     public static FragmentBuy newInstance(String param1, String param2) {
         FragmentBuy fragment = new FragmentBuy();
@@ -61,6 +62,28 @@ public class FragmentBuy extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_buy, container, false);
+        View view  = inflater.inflate(R.layout.fragment_buy, container, false);
+
+        rv_property_options = view.findViewById(R.id.rv_property_options);
+        rv_property_options.setLayoutManager(new LinearLayoutManager(
+                getActivity(),
+                LinearLayoutManager.HORIZONTAL,
+                false));
+        propertyTypes = new ArrayList<>();
+        propertyTypes.add(new PropertyType(1,"Individual \nHouses"));
+        propertyTypes.add(new PropertyType(2,"Apartments"));
+        propertyTypes.add(new PropertyType(3,"Villas"));
+        propertyTypes.add(new PropertyType(4,"Plots & \nVentures"));
+        propertyTypes.add(new PropertyType(5,"Agriculture \nLands"));
+        propertyTypes.add(new PropertyType(6,"Ventures"));
+        propertyTypes.add(new PropertyType(7,"Lease \nShops"));
+        propertyTypes.add(new PropertyType(8,"Commercial \nLands"));
+
+        propertyTypeAdapter = new PropertyTypeAdapter(propertyTypes,getActivity(),(position, o) -> {
+
+        });
+        rv_property_options.setAdapter(propertyTypeAdapter);
+
+        return  view;
     }
 }

@@ -2,10 +2,13 @@ package com.vk.housing.home;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,21 +19,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.vk.housing.Injection;
 import com.vk.housing.R;
-import com.vk.housing.adapter.HomeAdapter;
 import com.vk.housing.adapter.ProfileAdapter;
-import com.vk.housing.data.remote.dao.Property;
+import com.vk.housing.data.remote.dao.Settings;
 import com.vk.housing.settings.SettingsActivity;
-import com.vk.housing.util.OnItemClickListener;
+import com.vk.housing.util.OnActionClickListener;
+import com.vk.housing.util.ResultCallBackListener;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentProfile#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FragmentProfile extends Fragment implements OnItemClickListener {
+public class FragmentProfile extends Fragment implements OnActionClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,20 +54,12 @@ public class FragmentProfile extends Fragment implements OnItemClickListener {
 
     ProfileAdapter profileAdapter;
 
-    ArrayList<Property> properties;
+    ArrayList<Settings> settings;
 
     public FragmentProfile() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentProfile.
-     */
     // TODO: Rename and change types and number of parameters
     public static FragmentProfile newInstance(String param1, String param2) {
         FragmentProfile fragment = new FragmentProfile();
@@ -98,17 +97,30 @@ public class FragmentProfile extends Fragment implements OnItemClickListener {
                 getActivity(),
                 LinearLayoutManager.VERTICAL,
                 false));
-        properties = new ArrayList<>();
-        Property property = new Property();
-        property.setpAddress("Hydearabad");
-        properties.add(property);
-        Property property1 = new Property();
-        property1.setpAddress("Vijayawada");
-        properties.add(property1);
-        profileAdapter = new ProfileAdapter(properties, getActivity(), this);
+        settings = new ArrayList<>();
+        settings.add(new Settings(1, "Edit Profile"));
+        settings.add(new Settings(2, "Saved Properties"));
+        settings.add(new Settings(3, "Change Password"));
+        settings.add(new Settings(4, "About Us"));
+        settings.add(new Settings(5, "Terms Of Service"));
+        profileAdapter = new ProfileAdapter(settings, getActivity(), this);
         rv_profile_items.setAdapter(profileAdapter);
 
         return view;
+    }
+
+    void uploadImage(long property_id, String filepath) {
+        Injection.housingRepository(getContext()).uploadImage(property_id, filepath, new ResultCallBackListener() {
+            @Override
+            public void onSuccess(Object o) {
+
+            }
+
+            @Override
+            public void onFailure(Object o) {
+
+            }
+        });
     }
 
     public void imageDialog() {
@@ -165,16 +177,146 @@ public class FragmentProfile extends Fragment implements OnItemClickListener {
                     // update the preview image in the layout
                     iv_pic.setImageURI(selectedImageUri);
                 }
+
+                try {
+                    InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
+                    if (inputStream != null) {
+                        Log.d("IS", "Notnull");
+                    } else {
+                        Log.d("IS", "null");
+                    }
+                    saveInputStream(inputStream);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+//                savefile(selectedImageUri);
+
             } else if (requestCode == CAMERA_REQUEST) {
                 Bitmap photo = (Bitmap) data.getExtras().get("data");
+                uploadImage(2, saveToInternalStorage(photo));
                 iv_pic.setImageBitmap(photo);
             }
         }
     }
 
+    //TODO Pick image and upload image
+    private void saveInputStream(InputStream is) {
+
+        ContextWrapper cw = new ContextWrapper(getContext().getApplicationContext());
+
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath = new File(directory, "check.jpg");
+
+        BufferedInputStream bis = null;
+        BufferedOutputStream bos = null;
+
+        try {
+            bis = new BufferedInputStream(is);
+            bos = new BufferedOutputStream(new FileOutputStream(mypath.getAbsolutePath(), false));
+            byte[] buf = new byte[1024];
+            bis.read(buf);
+            do {
+                bos.write(buf);
+            } while (bis.read(buf) != -1);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("Exception", e.getMessage());
+        } finally {
+            try {
+                if (bis != null) bis.close();
+                if (bos != null) bos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //TODO Picking image check
+    private void savefile(Uri sourceuri) {
+        String sourceFilename = sourceuri.getPath();
+//        String destinationFilename = android.os.Environment.getExternalStorageDirectory().getPath()+File.separatorChar+"abc.mp3";
+        ContextWrapper cw = new ContextWrapper(getContext().getApplicationContext());
+
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath = new File(directory, "check.jpg");
+
+        BufferedInputStream bis = null;
+        BufferedOutputStream bos = null;
+
+        try {
+            bis = new BufferedInputStream(new FileInputStream(sourceFilename));
+            bos = new BufferedOutputStream(new FileOutputStream(mypath.getAbsolutePath(), false));
+            byte[] buf = new byte[1024];
+            bis.read(buf);
+            do {
+                bos.write(buf);
+            } while (bis.read(buf) != -1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bis != null) bis.close();
+                if (bos != null) bos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void saveFileDirectory(File mypath) {
+
+        BufferedInputStream bis = null;
+        BufferedOutputStream bos = null;
+
+        try {
+            bis = new BufferedInputStream(new FileInputStream(mypath));
+            bos = new BufferedOutputStream(new FileOutputStream(mypath.getAbsolutePath(), false));
+            byte[] buf = new byte[1024];
+            bis.read(buf);
+            do {
+                bos.write(buf);
+            } while (bis.read(buf) != -1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bis != null) bis.close();
+                if (bos != null) bos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private String saveToInternalStorage(Bitmap bitmapImage) {
+        ContextWrapper cw = new ContextWrapper(getContext().getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath = new File(directory, "profile.jpg");
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return mypath.getAbsolutePath();
+    }
+
     @Override
-    public void onItemClickListener(int position, Property property) {
-        Intent intent = new Intent(getActivity(),SettingsActivity.class);
+    public void onItemClickListener(int position, Object o) {
+        Intent intent = new Intent(getActivity(), SettingsActivity.class);
         startActivity(intent);
     }
 }

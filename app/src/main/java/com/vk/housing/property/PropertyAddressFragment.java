@@ -12,14 +12,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
+import com.vk.housing.Injection;
 import com.vk.housing.R;
+import com.vk.housing.util.ResultCallBackListener;
+import com.vk.housing.util.Util;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link PropertyAddressFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.HashMap;
+
 public class PropertyAddressFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -30,19 +32,12 @@ public class PropertyAddressFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private NavController navController;
 
     public PropertyAddressFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PropertyAddressFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static PropertyAddressFragment newInstance(String param1, String param2) {
         PropertyAddressFragment fragment = new PropertyAddressFragment();
@@ -73,11 +68,41 @@ public class PropertyAddressFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Log.d("Property", mParam1 + "");
 
-        final NavController navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(view);
         view.findViewById(R.id.btn_next).setOnClickListener(v -> {
             navController.navigate(R.id.action_propertyAddressFragment_to_propertyImagesFragment);
+
+            Log.d("Property", mParam1 + "");
+            EditText et_city = view.findViewById(R.id.et_city);
+            EditText et_name_a = view.findViewById(R.id.et_name_a);
+            EditText et_locality = view.findViewById(R.id.et_locality);
+            EditText et_address = view.findViewById(R.id.et_address);
+
+            HashMap<String, String> propertyHashMap = new HashMap<>();
+            propertyHashMap.put("property_id", mParam1);
+            propertyHashMap.put("city", Util.getString(et_city));
+            propertyHashMap.put("name", Util.getString(et_name_a));
+            propertyHashMap.put("locality", Util.getString(et_locality));
+            propertyHashMap.put("address", Util.getString(et_address));
+
+//            updateProperty(propertyHashMap);
+
+        });
+
+    }
+
+    void updateProperty(HashMap<String, String> propertyHashMap) {
+        Injection.housingRepository(getActivity()).updateProperty(propertyHashMap, new ResultCallBackListener() {
+            @Override
+            public void onSuccess(Object o) {
+                navController.navigate(R.id.action_propertyAddressFragment_to_propertyImagesFragment);
+            }
+
+            @Override
+            public void onFailure(Object o) {
+
+            }
         });
 
     }
